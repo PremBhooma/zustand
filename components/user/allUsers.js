@@ -5,14 +5,16 @@ import { Trash2 } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const AllUsers = () => {
-  const { users, loading, error, getAllUsers } = useUserStore();
+  const { users, loading, error, getAllUsers, deleteUser } = useUserStore();
 
   useEffect(() => {
     getAllUsers();
   }, [getAllUsers]);
 
-  const handleDelete = (id) => {
-    console.log("Deleting user with id:", id);
+  const handleDelete = async (id) => {
+    if (confirm("Are you sure you want to delete this user?")) {
+      await deleteUser(id);
+    }
   };
 
   return (
