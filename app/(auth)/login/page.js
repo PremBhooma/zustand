@@ -33,37 +33,30 @@ const page = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    try {
-      let error = false;
 
-      if (email === "") {
-        setEmailError("Email is required");
-        error = true;
-      }
-      if (password === "") {
-        setPasswordError("Password is required");
-        error = true;
-      }
-
-      if (!error) {
-        const response = await axios.post(`${BASEURL}api/user/login`, {
-          email: email,
-          password: password,
-        });
-        console.log(response.data);
-
-        if (response?.data?.errorCode === 0) {
-          updateUserinfo(response?.data?.data);
-          setEmail("");
-          setPassword("");
-          router.push("/");
-        } else {
-          console.log(response.data);
-        }
-      }
-    } catch (error) {
-      console.log("error", error);
+    if (email === "") {
+      setEmailError("Email is required");
+      return false;
     }
+    if (password === "") {
+      setPasswordError("Password is required");
+      return false;
+    }
+
+    await axios
+      .post(`${BASEURL}api/user/login`, {
+        email: email,
+        password: password,
+      })
+      .then((response) => {
+        setEmail("");
+        setPassword("");
+        router.push("/");
+        updateUserinfo(response?.data);
+      })
+      .catch((error) => {
+        console.log("Error:", error);
+      });
   };
 
   return (
