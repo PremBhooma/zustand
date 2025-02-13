@@ -35,41 +35,36 @@ const page = () => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    try {
-      let error = false;
 
-      if (name === "") {
-        setNameError("Name is required");
-        error = true;
-      }
-      if (email === "") {
-        setEmailError("Email is required");
-        error = true;
-      }
-      if (password === "") {
-        setPasswordError("Password is required");
-        error = true;
-      }
-
-      if (!error) {
-        const response = await axios.post(`${BASEURL}api/user/create`, {
-          name: name,
-          email: email,
-          password: password,
-        });
-
-        if (response?.data?.errorCode === 0) {
-          setName("");
-          setEmail("");
-          setPassword("");
-          router.push("/login");
-        } else {
-          console.log(response.data);
-        }
-      }
-    } catch (error) {
-      console.error(error);
+    if (name === "") {
+      setNameError("Name is required");
+      return false;
     }
+    if (email === "") {
+      setEmailError("Email is required");
+      return false;
+    }
+    if (password === "") {
+      setPasswordError("Password is required");
+      return false;
+    }
+
+    await axios
+      .post(`${BASEURL}api/user/create`, {
+        name: name,
+        email: email,
+        password: password,
+      })
+      .then((response) => {
+        console.log("Response:", response?.data);
+        setName("");
+        setEmail("");
+        setPassword("");
+        router.push("/login");
+      })
+      .catch((error) => {
+        console.log("Error:", error);
+      });
   };
 
   return (
