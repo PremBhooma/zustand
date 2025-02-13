@@ -14,6 +14,7 @@ const AllUsers = () => {
   const handleDelete = async (id) => {
     if (confirm("Are you sure you want to delete this user?")) {
       await deleteUser(id);
+      getAllUsers();
     }
   };
 
