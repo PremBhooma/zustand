@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useUserInfo } from "@/zustand/useUserInfo";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { BASEURL } from "@/configs/constant";
