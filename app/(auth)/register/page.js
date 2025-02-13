@@ -3,6 +3,8 @@
 import React, { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { BASEURL } from "@/configs/constant";
+import axios from "axios";
 
 const page = () => {
   const [name, setName] = useState("");
@@ -27,6 +29,41 @@ const page = () => {
     let value = e.target.value;
     setPassword(value);
     setPasswordError("");
+  };
+
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    try {
+      let error = false;
+
+      if (name === "") {
+        setNameError("Name is required");
+        error = true;
+      }
+      if (email === "") {
+        setEmailError("Email is required");
+        error = true;
+      }
+      if (password === "") {
+        setPasswordError("Password is required");
+        error = true;
+      }
+
+      if (!error) {
+        const response = await axios.post(`${BASEURL}api/user/create`, {
+          name: name,
+          email: email,
+          password: password,
+        });
+        if (response.errorCode === 0) {
+          alert("Register success");
+        } else {
+          console.log(response.data);
+        }
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -69,7 +106,7 @@ const page = () => {
               </div>
               {passwordError !== "" && <div>{passwordError}</div>}
               <div>
-                <button type="submit" className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                <button onClick={handleRegister} type="submit" className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                   Sign in
                 </button>
               </div>
