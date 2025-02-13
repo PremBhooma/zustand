@@ -4,9 +4,11 @@ import React, { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { BASEURL } from "@/configs/constant";
+import { useRouter } from "next/navigation";
 import axios from "axios";
 
 const page = () => {
+  const router = useRouter();
   const [name, setName] = useState("");
   const [nameError, setNameError] = useState("");
   const updateName = (e) => {
@@ -55,13 +57,12 @@ const page = () => {
           email: email,
           password: password,
         });
-        console.log("Response:", response?.data?.data);
 
         if (response?.data?.errorCode === 0) {
-          alert("Register success");
           setName("");
           setEmail("");
           setPassword("");
+          router.push("/login");
         } else {
           console.log(response.data);
         }
