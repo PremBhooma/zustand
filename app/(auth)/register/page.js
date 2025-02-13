@@ -1,8 +1,34 @@
+"use client";
+
+import React, { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import React from "react";
 
 const page = () => {
+  const [name, setName] = useState("");
+  const [nameError, setNameError] = useState("");
+  const updateName = (e) => {
+    let value = e.target.value;
+    setName(value);
+    setNameError("");
+  };
+
+  const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const updateEmail = (e) => {
+    let value = e.target.value;
+    setEmail(value);
+    setEmailError("");
+  };
+
+  const [password, setPassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const updatePassword = (e) => {
+    let value = e.target.value;
+    setPassword(value);
+    setPasswordError("");
+  };
+
   return (
     <>
       <section className="min-h-screen">
@@ -18,17 +44,19 @@ const page = () => {
                   Name
                 </Label>
                 <div className="mt-2">
-                  <Input type="text" name="name" id="name" autoComplete="name" required />
+                  <Input type="text" name="name" id="name" autoComplete="name" value={name} onChange={updateName} required />
                 </div>
               </div>
+              {nameError !== "" && <div>{nameError}</div>}
               <div>
                 <Label htmlFor="email" className="block text-sm/6 font-medium text-gray-900">
                   Email address
                 </Label>
                 <div className="mt-2">
-                  <Input type="email" name="email" id="email" autoComplete="email" required />
+                  <Input type="email" name="email" id="email" autoComplete="email" value={email} onChange={updateEmail} required />
                 </div>
               </div>
+              {emailError !== "" && <div>{emailError}</div>}
               <div>
                 <div className="flex items-center justify-between">
                   <Label htmlFor="password" className="block text-sm/6 font-medium text-gray-900">
@@ -36,9 +64,10 @@ const page = () => {
                   </Label>
                 </div>
                 <div className="mt-2">
-                  <Input type="password" name="password" id="password" autoComplete="current-password" required />
+                  <Input type="password" name="password" id="password" autoComplete="current-password" value={password} onChange={updatePassword} required />
                 </div>
               </div>
+              {passwordError !== "" && <div>{passwordError}</div>}
               <div>
                 <button type="submit" className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                   Sign in
