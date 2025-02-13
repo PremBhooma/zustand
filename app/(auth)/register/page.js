@@ -11,6 +11,9 @@ const page = () => {
   const router = useRouter();
   const [name, setName] = useState("");
   const [nameError, setNameError] = useState("");
+  const isLogged = useUserInfo((state) => state.isLogged);
+  const hasHydrated = useUserInfo((state) => state.hasHydrated);
+
   const updateName = (e) => {
     let value = e.target.value;
     setName(value);
@@ -32,6 +35,12 @@ const page = () => {
     setPassword(value);
     setPasswordError("");
   };
+
+  useEffect(() => {
+    if (hasHydrated && isLogged) {
+      router.push("/");
+    }
+  }, [hasHydrated, isLogged, router]);
 
   const handleRegister = async (e) => {
     e.preventDefault();

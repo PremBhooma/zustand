@@ -11,7 +11,7 @@ import axios from "axios";
 const page = () => {
   const router = useRouter();
   const isLogged = useUserInfo((state) => state.isLogged);
-  const hasHydrated = useUserInfo((state) => state.hasHydrated); // Check hydration
+  const hasHydrated = useUserInfo((state) => state.hasHydrated);
   const updateUserinfo = useUserInfo((state) => state.updateUserInfo);
 
   const [email, setEmail] = useState("");
