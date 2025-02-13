@@ -3,8 +3,10 @@
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import React, { useState } from "react";
+import { useUserInfo } from "@/zustand/useUserInfo";
 
 const Navbar = () => {
+  const resetUserInfo = useUserInfo((state) => state.resetUserInfo);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [profileMenuOpen, setProfileMenuOpen] = useState(false);
 
@@ -61,9 +63,9 @@ const Navbar = () => {
                   <Link href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                     Settings
                   </Link>
-                  <Link href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                  <div onClick={resetUserInfo} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                     Sign out
-                  </Link>
+                  </div>
                 </div>
               )}
             </div>

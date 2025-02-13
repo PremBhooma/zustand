@@ -19,7 +19,7 @@ const useUserInfo = create(
           isLogged: false,
         });
       },
-      setHydrated: () => set({ hasHydrated: true }), // Setter for hydration
+      setHydrated: () => set({ hasHydrated: true }),
     }),
     {
       name: "userInfo",

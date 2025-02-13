@@ -5,15 +5,14 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { BASEURL } from "@/configs/constant";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const page = () => {
   const router = useRouter();
-  const userinfo = useUserInfo((state) => state.userInfo);
+  const isLogged = useUserInfo((state) => state.isLogged);
+  const hasHydrated = useUserInfo((state) => state.hasHydrated); // Check hydration
   const updateUserinfo = useUserInfo((state) => state.updateUserInfo);
-
-  console.log("UserInfo", userinfo);
 
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
@@ -30,6 +29,13 @@ const page = () => {
     setPassword(value);
     setPasswordError("");
   };
+
+  // Redirect if already logged in
+  useEffect(() => {
+    if (hasHydrated && isLogged) {
+      router.push("/");
+    }
+  }, [hasHydrated, isLogged, router]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -51,13 +57,24 @@ const page = () => {
       .then((response) => {
         setEmail("");
         setPassword("");
-        router.push("/");
         updateUserinfo(response?.data?.data);
+        router.push("/"); // Redirect after successful login
       })
       .catch((error) => {
         console.log("Error:", error);
       });
   };
+
+  // Show loader until hydration is complete
+  if (!hasHydrated) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full" role="status">
+          <span className="visually-hidden"></span>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>
