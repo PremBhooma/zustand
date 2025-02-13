@@ -34,11 +34,6 @@ const page = () => {
                   <Label htmlFor="password" className="block text-sm/6 font-medium text-gray-900">
                     Password
                   </Label>
-                  <div className="text-sm">
-                    <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
-                      Forgot password?
-                    </a>
-                  </div>
                 </div>
                 <div className="mt-2">
                   <Input type="password" name="password" id="password" autoComplete="current-password" required />
