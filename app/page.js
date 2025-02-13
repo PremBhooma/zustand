@@ -1,6 +1,7 @@
 "use client";
 
 import Navbar from "@/components/navbar";
+import AllUsers from "@/components/user/allUsers";
 import { useUserInfo } from "@/zustand/useUserInfo";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
@@ -29,7 +30,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <h1>Home Page</h1>
+      <AllUsers />
     </>
   );
 }
