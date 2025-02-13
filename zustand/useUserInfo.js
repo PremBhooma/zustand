@@ -1,7 +1,7 @@
 const { create } = require("zustand");
 import { persist, createJSONStorage } from "zustand/middleware";
 
-const store = () => ({
+const store = (set) => ({
   userInfo: null,
   isLogged: false,
   updateUserInfo: (data) => {

@@ -1,11 +1,12 @@
 "use client";
 
+import { useUserInfo } from "@/zustand/useUserInfo";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useUserInfo } from "@/zustand/useUserInfo";
-import axios from "axios";
+import { BASEURL } from "@/configs/constant";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import axios from "axios";
 
 const page = () => {
   const router = useRouter();
