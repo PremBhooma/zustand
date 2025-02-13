@@ -22,7 +22,6 @@ const useUserStore = create((set) => ({
   // Delete User
   deleteUser: async (userId) => {
     set({ loading: true, error: null });
-
     try {
       await axios.post(`${BASEURL}api/user/delete/${userId}`);
       set((state) => ({
