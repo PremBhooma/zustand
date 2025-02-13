@@ -56,8 +56,7 @@ const page = () => {
           updateUserinfo(response?.data?.data);
           setEmail("");
           setPassword("");
-          alert("Login Success");
-          // router.push("/login");
+          router.push("/");
         } else {
           console.log(response.data);
         }
