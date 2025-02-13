@@ -52,7 +52,7 @@ const page = () => {
         setEmail("");
         setPassword("");
         router.push("/");
-        updateUserinfo(response?.data);
+        updateUserinfo(response?.data?.data);
       })
       .catch((error) => {
         console.log("Error:", error);
