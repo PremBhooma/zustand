@@ -1,8 +1,8 @@
-import { useUserStore } from "@/zustand/useUserStore";
-import React, { useEffect } from "react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../ui/table";
-import { Trash2 } from "lucide-react";
+import { useUserStore } from "@/zustand/useUserStore";
 import { Skeleton } from "@/components/ui/skeleton";
+import React, { useEffect } from "react";
+import { Trash2 } from "lucide-react";
 
 const AllUsers = () => {
   const { users, loading, error, getAllUsers, deleteUser } = useUserStore();
