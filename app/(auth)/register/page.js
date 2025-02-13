@@ -55,8 +55,13 @@ const page = () => {
           email: email,
           password: password,
         });
-        if (response.errorCode === 0) {
+        console.log("Response:", response?.data?.data);
+
+        if (response?.data?.errorCode === 0) {
           alert("Register success");
+          setName("");
+          setEmail("");
+          setPassword("");
         } else {
           console.log(response.data);
         }
@@ -76,35 +81,41 @@ const page = () => {
           </div>
           <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
             <form className="space-y-6">
-              <div>
-                <Label htmlFor="name" className="block text-sm/6 font-medium text-gray-900">
-                  Name
-                </Label>
-                <div className="mt-2">
-                  <Input type="text" name="name" id="name" autoComplete="name" value={name} onChange={updateName} required />
-                </div>
-              </div>
-              {nameError !== "" && <div>{nameError}</div>}
-              <div>
-                <Label htmlFor="email" className="block text-sm/6 font-medium text-gray-900">
-                  Email address
-                </Label>
-                <div className="mt-2">
-                  <Input type="email" name="email" id="email" autoComplete="email" value={email} onChange={updateEmail} required />
-                </div>
-              </div>
-              {emailError !== "" && <div>{emailError}</div>}
-              <div>
-                <div className="flex items-center justify-between">
-                  <Label htmlFor="password" className="block text-sm/6 font-medium text-gray-900">
-                    Password
+              <div className="space-y-2">
+                <div>
+                  <Label htmlFor="name" className="block text-sm/6 font-medium text-gray-900">
+                    Name
                   </Label>
+                  <div className="mt-2">
+                    <Input type="text" name="name" id="name" autoComplete="name" value={name} onChange={updateName} required />
+                  </div>
                 </div>
-                <div className="mt-2">
-                  <Input type="password" name="password" id="password" autoComplete="current-password" value={password} onChange={updatePassword} required />
-                </div>
+                {nameError !== "" && <div className="text-xs text-red-500">{nameError}</div>}
               </div>
-              {passwordError !== "" && <div>{passwordError}</div>}
+              <div className="space-y-2">
+                <div>
+                  <Label htmlFor="email" className="block text-sm/6 font-medium text-gray-900">
+                    Email address
+                  </Label>
+                  <div className="mt-2">
+                    <Input type="email" name="email" id="email" autoComplete="email" value={email} onChange={updateEmail} required />
+                  </div>
+                </div>
+                {emailError !== "" && <div className="text-xs text-red-500">{emailError}</div>}
+              </div>
+              <div className="space-y-2">
+                <div>
+                  <div className="flex items-center justify-between">
+                    <Label htmlFor="password" className="block text-sm/6 font-medium text-gray-900">
+                      Password
+                    </Label>
+                  </div>
+                  <div className="mt-2">
+                    <Input type="password" name="password" id="password" autoComplete="current-password" value={password} onChange={updatePassword} required />
+                  </div>
+                </div>
+                {passwordError !== "" && <div className="text-xs text-red-500">{passwordError}</div>}
+              </div>
               <div>
                 <button onClick={handleRegister} type="submit" className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                   Sign in
